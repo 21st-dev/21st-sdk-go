@@ -72,13 +72,15 @@ func (t *ThreadsResource) Run(ctx context.Context, req *RunThreadRequest) (*RunT
 
 	encodedAgent := url.PathEscape(req.Agent)
 	body := struct {
-		Messages  []RunThreadMessage `json:"messages"`
-		SandboxID string             `json:"sandboxId"`
-		ThreadID  string             `json:"threadId"`
+		Messages  []RunThreadMessage   `json:"messages"`
+		SandboxID string               `json:"sandboxId"`
+		ThreadID  string               `json:"threadId"`
+		Options   *AgentRequestOptions `json:"options,omitempty"`
 	}{
 		Messages:  req.Messages,
 		SandboxID: sandboxID,
 		ThreadID:  threadID,
+		Options:   req.Options,
 	}
 
 	resp, err := t.client.doRequest(ctx, "POST", "/v1/chat/"+encodedAgent, body)

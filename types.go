@@ -58,12 +58,23 @@ type RunThreadMessage struct {
 	Parts []map[string]interface{} `json:"parts"`
 }
 
+// AgentRequestOptions holds per-invocation agent configuration options.
+type AgentRequestOptions struct {
+	Model           string   `json:"model,omitempty"`
+	SystemPrompt    any      `json:"systemPrompt,omitempty"`
+	MaxTurns        int      `json:"maxTurns,omitempty"`
+	MaxBudgetUsd    float64  `json:"maxBudgetUsd,omitempty"`
+	PermissionMode  string   `json:"permissionMode,omitempty"`
+	DisallowedTools []string `json:"disallowedTools,omitempty"`
+}
+
 type RunThreadRequest struct {
-	Agent     string             `json:"agent"`
-	Messages  []RunThreadMessage `json:"messages"`
-	SandboxID string             `json:"sandboxId,omitempty"`
-	ThreadID  string             `json:"threadId,omitempty"`
-	Name      string             `json:"name,omitempty"`
+	Agent     string                `json:"agent"`
+	Messages  []RunThreadMessage    `json:"messages"`
+	SandboxID string                `json:"sandboxId,omitempty"`
+	ThreadID  string                `json:"threadId,omitempty"`
+	Name      string                `json:"name,omitempty"`
+	Options   *AgentRequestOptions  `json:"options,omitempty"`
 }
 
 type RunThreadResult struct {
