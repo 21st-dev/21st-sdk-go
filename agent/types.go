@@ -51,11 +51,14 @@ type ToolDefinition interface {
 type Tools map[string]ToolDefinition
 
 type Sandbox struct {
-	Apt   []string          `json:"apt,omitempty"`
-	Build []string          `json:"build,omitempty"`
-	Setup []string          `json:"setup,omitempty"`
-	Files map[string]string `json:"files,omitempty"`
-	Cwd   string            `json:"cwd,omitempty"`
+	Apt             []string          `json:"apt,omitempty"`
+	Build           []string          `json:"build,omitempty"`
+	Setup           []string          `json:"setup,omitempty"`
+	Files           map[string]string `json:"files,omitempty"`
+	Cwd             string            `json:"cwd,omitempty"`
+	TimeoutMs       *int              `json:"timeoutMs,omitempty"`
+	NetworkAllowOut []string          `json:"networkAllowOut,omitempty"`
+	NetworkDenyOut  []string          `json:"networkDenyOut,omitempty"`
 }
 
 type Config struct {
