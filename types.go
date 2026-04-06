@@ -5,10 +5,13 @@ import "net/http"
 // --- Sandbox types ---
 
 type CreateSandboxRequest struct {
-	Agent string            `json:"agent"`
-	Files map[string]string `json:"files,omitempty"`
-	Envs  map[string]string `json:"envs,omitempty"`
-	Setup []string          `json:"setup,omitempty"`
+	Agent           string            `json:"agent"`
+	Files           map[string]string `json:"files,omitempty"`
+	Envs            map[string]string `json:"envs,omitempty"`
+	Setup           []string          `json:"setup,omitempty"`
+	TimeoutMs       *int              `json:"timeoutMs,omitempty"`
+	NetworkAllowOut []string          `json:"networkAllowOut,omitempty"`
+	NetworkDenyOut  []string          `json:"networkDenyOut,omitempty"`
 }
 
 type Sandbox struct {

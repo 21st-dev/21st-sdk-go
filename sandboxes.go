@@ -14,8 +14,30 @@ type SandboxesResource struct {
 }
 
 func (s *SandboxesResource) Create(ctx context.Context, req *CreateSandboxRequest) (*Sandbox, error) {
+	body := map[string]interface{}{
+		"agent": req.Agent,
+	}
+	if req.Files != nil {
+		body["files"] = req.Files
+	}
+	if req.Envs != nil {
+		body["envs"] = req.Envs
+	}
+	if req.Setup != nil {
+		body["setup"] = req.Setup
+	}
+	if req.TimeoutMs != nil {
+		body["timeoutMs"] = req.TimeoutMs
+	}
+	if req.NetworkAllowOut != nil {
+		body["networkAllowOut"] = req.NetworkAllowOut
+	}
+	if req.NetworkDenyOut != nil {
+		body["networkDenyOut"] = req.NetworkDenyOut
+	}
+
 	var out Sandbox
-	err := s.client.do(ctx, "POST", "/v1/sandboxes", req, &out)
+	err := s.client.do(ctx, "POST", "/v1/sandboxes", body, &out)
 	if err != nil {
 		return nil, err
 	}
